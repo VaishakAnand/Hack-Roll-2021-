@@ -10,11 +10,7 @@ class Date {
   }
 
   static DateTime getDateFromDatabase(int date) {
+    print("extracting date:   " + date.toString());
     return DateTime.fromMillisecondsSinceEpoch(date);
   }
-
-  // @override
-  //   String toString() {
-  //     return dateTime;
-  //   }
 }

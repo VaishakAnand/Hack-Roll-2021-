@@ -13,14 +13,20 @@ class HistoryTile extends StatefulWidget {
   @override
   _HistoryTileState createState() => _HistoryTileState();
 
-  HistoryTile({this.dateTime, this.valence, this.arousal, this.keywords, this.onDelete, this.onClick});
+  HistoryTile(
+      {this.dateTime,
+      this.valence,
+      this.arousal,
+      this.keywords,
+      this.onDelete,
+      this.onClick});
 }
 
 class _HistoryTileState extends State<HistoryTile> {
-
   @override
   Widget build(BuildContext context) {
     final DateFormat formatter = DateFormat('yyyy-MM-dd jm');
+    print(widget.valence);
     final String formatted = formatter.format(widget.dateTime);
 
     return Container(
