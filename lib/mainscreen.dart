@@ -35,9 +35,11 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
         onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          if(this.mounted) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
         },
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
