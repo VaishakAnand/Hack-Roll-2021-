@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutterapp/music_objects/api_music_suggestions.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutterapp/api_management.dart';
+import 'music_suggestions.dart';
 
 class Music extends StatefulWidget {
   @override
@@ -10,49 +8,35 @@ class Music extends StatefulWidget {
 }
 
 class MusicState extends State<Music> {
-  Future<MusicSuggestions> futureMusic;
+  MusicSuggestions _suggestions;
+  bool _loading;
 
   @override
   void initState() {
     super.initState();
-    futureMusic = fetchMusicSuggestions();
+    _loading = true;
+    MusicApi.getSuggestions().then((suggestions) {
+      _suggestions = suggestions;
+      _loading = false;
+    });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fetching Song suggestions'),
-      ),
-      body: Center(
-        child: FutureBuilder<MusicSuggestions>(
-          future: futureMusic,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data.request.listenercountry);
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-
-            // By default, show a loading spinner.
-            return CircularProgressIndicator();
-          },
+        appBar: AppBar(
+          title: Text('Fetching Song suggestions'),
         ),
-      ),
-    );
+        body: Center(child: _showDetails()));
   }
-}
 
-Future<MusicSuggestions> fetchMusicSuggestions() async {
-  final response = await http.get(
-      'http://musicovery.com/api/V6/playlist.php?&fct=getfrommood&popularitymax=100&popularitymin=50&starttrackid=&date70=true&trackvalence=900000&trackarousal=100000&resultsnumber=15&listenercountry=es');
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return MusicSuggestions.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load music suggestions');
+  Widget _showDetails() {
+    if (_loading) {
+      return CircularProgressIndicator();
+    } else {
+      return Text(_suggestions.tracks.track.isEmpty
+          ? "Is Empty"
+          : _suggestions.tracks.track[0].artistDisplayName.toString());
+    }
   }
 }
