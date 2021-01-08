@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/music_api.dart';
 import 'landing.dart';
 
 void main() {
@@ -16,8 +15,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFF143930),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // home: LandingPage(),
-      home: Music(),
+      home: LandingPage(),
     );
   }
 }

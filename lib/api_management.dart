@@ -2,8 +2,12 @@ import 'music_suggestions.dart';
 import 'package:http/http.dart' as http;
 
 class MusicApi {
-  static const String url =
-      "http://musicovery.com/api/V6/playlist.php?&fct=getfrommood&popularitymax=100&popularitymin=50&starttrackid=&date70=true&trackvalence=900000&trackarousal=100000&resultsnumber=15&listenercountry=es";
+  static int valence = 200000;
+  static int arousal = 400000;
+  static String valenceString = valence.toString();
+  static String arousalString = arousal.toString();
+  static String url =
+      "http://musicovery.com/api/V6/playlist.php?&fct=getfrommood&popularitymax=100&popularitymin=10&starttrackid=&trackvalence=$valenceString&trackarousal=$arousalString&resultsnumber=3&listenercountry=us";
 
   static Future<MusicSuggestions> getSuggestions() async {
     try {
