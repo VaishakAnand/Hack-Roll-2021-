@@ -84,7 +84,6 @@ class MusicState extends State<Music> {
       mergedKeywords = mergedKeywords + toAddDivider;
     }
 
-    print(currentTimeToSave);
     Data dataToSave = Data(
       dateTime: currentTimeToSave,
       valenceScore: valence,

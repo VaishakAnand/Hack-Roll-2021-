@@ -25,8 +25,7 @@ class HistoryTile extends StatefulWidget {
 class _HistoryTileState extends State<HistoryTile> {
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd jm');
-    print(widget.valence);
+    final DateFormat formatter = DateFormat('dd-MM-yyyy hh:mm');
     final String formatted = formatter.format(widget.dateTime);
 
     return Container(
