@@ -120,12 +120,11 @@ class _HomePageState extends State<HomePage> {
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(onStatus: (val) {
-        print("status: $val");
         if (val == 'notListening') {
           _isListening = false;
         }
       });
-      if (available) {
+      if (available && mounted) {
         setState(() => _isListening = true);
         _speech.listen(
           onResult: (val) => setState(() {

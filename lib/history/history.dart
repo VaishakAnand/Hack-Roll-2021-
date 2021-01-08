@@ -49,10 +49,12 @@ class HistoryPage extends StatelessWidget {
     List<HistoryTile> historyTiles = List();
     for (var i = 0; i < tiles.length; i++) {
       Data currentData = tiles[i];
-      var splitKeywords = currentData.keywords.split("|");
+      List<String> splitKeywords = currentData.keywords.split("|");
       HistoryTile newTile = HistoryTile(
         valence: currentData.valenceScore,
         arousal: currentData.arousalScore,
+        onDelete: () => DBProvider.db.deleteData(currentData.id),
+        onClick: (){},
         keywords: splitKeywords,
       );
 
