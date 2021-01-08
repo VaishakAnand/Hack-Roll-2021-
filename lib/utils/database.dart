@@ -23,14 +23,14 @@ class DBProvider {
       join(await getDatabasesPath(), 'text_song_data.db'),
       onCreate: (db, version) async {
         await db.execute(
-          "CREATE TABLE data(id INTEGER PRIMARY KEY, datetime INTEGER, arousal INTEGER, valence INTEGER)",
+          "CREATE TABLE data(id INTEGER PRIMARY KEY, datetime INTEGER, arousal INTEGER, valence INTEGER, keywords TEXT, songname TEXT, artistname TEXT, genre TEXT, releaseyear TEXT)",
         );
       },
       version: 1,
     );
   }
 
-  Future<void> newData(newData) async {
+  Future<void> newData(Data newData) async {
     final Database db = await database;
 
     await db.insert(
@@ -47,10 +47,16 @@ class DBProvider {
 
     return List.generate(maps.length, (i) {
       return Data(
-          id: maps[i]['id'],
-          dateTime: maps[i]['datetime'],
-          arousalScore: maps[i]['arousal'],
-          valenceScore: maps[i]['valence']);
+        id: maps[i]['id'],
+        dateTime: maps[i]['datetime'],
+        arousalScore: maps[i]['arousal'],
+        valenceScore: maps[i]['valence'],
+        keywords: maps[i]['keywords'],
+        songName: maps[i]['songname'],
+        artistName: maps[i]['artistname'],
+        genre: maps[i]['genre'],
+        releaseYear: maps[i]['releaseyear'],
+      );
     });
   }
 

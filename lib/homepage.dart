@@ -1,6 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/utils/database.dart';
 import 'bottom_button.dart';
 import 'time_display.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -95,6 +96,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   );
                 }
+
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
