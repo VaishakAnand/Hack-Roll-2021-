@@ -110,10 +110,13 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsPage(
-                        // interpretation: 'your mood',
-                        // tempResult: 'song name',
-                        // resultText: 'artist name'),
-                        testWidget: Music()),
+                      // interpretation: 'your mood',
+                      // tempResult: 'song name',
+                      // resultText: 'artist name'),
+                      testWidget: Music(
+                        userInputText: textController.text,
+                      ),
+                    ),
                   ),
                 );
               }
