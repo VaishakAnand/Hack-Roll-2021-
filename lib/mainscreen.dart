@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'history.dart';
 
+// Main Screen w/ BottomNavigationBar functionality to switch pages.
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         showSelectedLabels: true,

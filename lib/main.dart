@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'landing.dart';
 import 'mainscreen.dart';
 import 'constants.dart';
 
