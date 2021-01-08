@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         showSelectedLabels: true,
@@ -27,11 +27,11 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
-            ),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            title: Text('History'),
+            label: 'History',
           )
         ],
         onTap: (index) {
@@ -43,5 +43,4 @@ class _MainScreenState extends State<MainScreen> {
       body: _widgetOptions.elementAt(_selectedIndex),
     );
   }
-
 }
