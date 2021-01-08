@@ -1,9 +1,8 @@
 import 'package:sentiment_dart/sentiment_dart.dart';
 
 class SentimentScore {
-
   String text;
-  Map<String,dynamic> analysis;
+  Map<String, dynamic> analysis;
 
   SentimentScore(String text) {
     this.text = text;
@@ -15,8 +14,8 @@ class SentimentScore {
   /// 500,000 is the neutral score
   int getValenceScore() {
     int tokensLength = analysis["words"].length;
-    double valenceScore = 500000 +
-        (analysis["score"] / (tokensLength * 5)) * 500000;
+    double valenceScore =
+        500000 + (analysis["score"] / (tokensLength * 5)) * 500000;
     return valenceScore.round();
   }
 
