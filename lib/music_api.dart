@@ -15,9 +15,15 @@ class MusicState extends State<Music> {
   void initState() {
     super.initState();
     _loading = true;
-    MusicApi.getSuggestions().then((suggestions) {
-      _suggestions = suggestions;
-      _loading = false;
+    _initialLoad();
+  }
+
+  void _initialLoad() async {
+    await MusicApi.getSuggestions().then((suggestions) {
+      setState(() {
+        _suggestions = suggestions;
+        _loading = false;
+      });
     });
   }
 
