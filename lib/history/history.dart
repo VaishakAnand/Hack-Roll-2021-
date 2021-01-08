@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/constants.dart';
 import 'package:flutterapp/history/history_tile.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -7,7 +8,10 @@ class HistoryPage extends StatelessWidget {
     List<String> s = ["abc", "efg"]; // sample data
     return Scaffold(
       appBar: AppBar(
-        title: Text("History"),
+        title: Text(
+            "History",
+            style: kLabelTextStyle,
+        ),
         centerTitle: true,
       ),
       body: Column(

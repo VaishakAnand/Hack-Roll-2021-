@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 import 'package:flutterapp/results.dart';
 import 'bottom_button.dart';
+import 'searchbutton.dart';
 import 'time_display.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Flutter Away',
+          'Moodsical',
           style: kLabelTextStyle,
         ),
         centerTitle: true,
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
+                alignment: Alignment.bottomCenter,
                 child: Time(),
               ),
             ),
@@ -57,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextField(
+                    textAlign: TextAlign.center,
                     controller: textController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -82,9 +85,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          BottomButton(
-            buttonTitle: 'SEARCH',
-            onTap: () {
+          CustomButton(
+            onPressed: () {
               if (textController.text.isEmpty) {
                 showDialog(
                   context: context,
@@ -133,4 +135,6 @@ class _HomePageState extends State<HomePage> {
       _speech.stop();
     }
   }
+
+
 }
