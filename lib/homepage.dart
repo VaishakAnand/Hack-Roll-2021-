@@ -1,7 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/music_api.dart';
 import 'package:flutterapp/results.dart';
+import 'package:flutterapp/song_calculator.dart';
 import 'bottom_button.dart';
 import 'time_display.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -95,13 +97,19 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
               } else {
+                // SongCalculator songCalculator =
+                //     SongCalculator(moodText: textController.text);
+                // songCalculator.getSongDetails();
+                // textController.clear();
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsPage(
-                        interpretation: 'your mood',
-                        tempResult: 'song name',
-                        resultText: 'artist name'),
+                        // interpretation: 'your mood',
+                        // tempResult: 'song name',
+                        // resultText: 'artist name'),
+                        testWidget: Music()),
                   ),
                 );
               }
