@@ -5,7 +5,10 @@ class MultipleTracks {
 
   MultipleTracks({this.tracks});
 
-  factory MultipleTracks.fromJson(Map<String, dynamic> parsedJson) {
-    return MultipleTracks(tracks: parsedJson['track']);
+  factory MultipleTracks.fromJson(List<dynamic> parsedJson) {
+    List<Track> trackList = new List<Track>();
+
+    trackList = parsedJson.map((i) => Track.fromJson(i)).toList();
+    return new MultipleTracks(tracks: trackList);
   }
 }
