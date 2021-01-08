@@ -1,7 +1,9 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 import 'bottom_button.dart';
 import 'time_display.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 // This is the page when you click 'HOME'
 
@@ -12,6 +14,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final textController = TextEditingController();
+  stt.SpeechToText _speech;
+  bool _isListening = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                       cursorColor: kAppBarColour,
                     ),
-                  )
+                  ),
+                  AvatarGlow(
+                    animate: _isListening,
+                    glowColor: Theme.of(context).primaryColor,
+                    endRadius: 30.0,
+                    duration: const Duration(milliseconds: 2000),
+                    repeatPauseDuration: const Duration(milliseconds: 100),
+                    repeat: true,
+                    child: FlatButton(
+                      onPressed: _listen,
+                      child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -85,5 +107,27 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(onStatus: (val) {
+        print("status: $val");
+        if (val == 'notListening') {
+          _isListening = false;
+        }
+      });
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            textController.text = val.recognizedWords;
+          }),
+        );
+      }
+    } else {
+      setState(() => {_isListening = false});
+      _speech.stop();
+    }
   }
 }
