@@ -113,9 +113,7 @@ class _HomePageState extends State<HomePage> {
                       // interpretation: 'your mood',
                       // tempResult: 'song name',
                       // resultText: 'artist name'),
-                      testWidget: Music(
-                        userInputText: textController.text,
-                      ),
+                      testWidget: Music(),
                     ),
                   ),
                 );
