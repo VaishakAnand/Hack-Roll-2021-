@@ -1,6 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/results.dart';
 import 'bottom_button.dart';
 import 'time_display.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -94,13 +95,17 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                          interpretation: 'your mood',
+                          tempResult: 'song name',
+                          resultText: 'artist name'),
+                    ),
+                  );
                 }
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => ResultsPage(),
-                //   ),
-                // );
               },
             ),
           ],
