@@ -85,7 +85,6 @@ class _HomePageState extends State<HomePage> {
                     onPressed: _listen,
                     child: Icon(_isListening ? Icons.mic : Icons.mic_none),
                   ),
-
                 ),
               ],
             ),
@@ -145,6 +144,4 @@ class _HomePageState extends State<HomePage> {
       _speech.stop();
     }
   }
-
-
 }
