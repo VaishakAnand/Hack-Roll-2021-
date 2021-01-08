@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/api_management.dart';
 import 'music_suggestions.dart';
+import 'sentiment_score.dart';
 
 class Music extends StatefulWidget {
+  String userInputText;
+
+  Music({@required this.userInputText});
+
   @override
   MusicState createState() => MusicState();
 }
@@ -10,6 +15,8 @@ class Music extends StatefulWidget {
 class MusicState extends State<Music> {
   MusicSuggestions _suggestions;
   bool _loading;
+  SentimentScore sentimentScore;
+  MusicApi musicApi;
 
   @override
   void initState() {
@@ -19,7 +26,7 @@ class MusicState extends State<Music> {
   }
 
   void _initialLoad() async {
-    await MusicApi.getSuggestions().then((suggestions) {
+    await musicApi.getSuggestions().then((suggestions) {
       setState(() {
         _suggestions = suggestions;
         _loading = false;
@@ -29,6 +36,12 @@ class MusicState extends State<Music> {
 
   @override
   Widget build(BuildContext context) {
+    sentimentScore = SentimentScore(widget.userInputText);
+    musicApi = MusicApi(
+        valence: sentimentScore.getValenceScore(),
+        arousal: sentimentScore.getArousalScore());
+    // print(sentimentScore.getValenceScore());
+    // print('Valence score' + );
     return Scaffold(
         appBar: AppBar(
           title: Text('Here are your music suggestions'),
