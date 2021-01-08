@@ -11,7 +11,7 @@ const kLabelTextStyle = TextStyle(
 );
 
 const kGreetingTextStyle = TextStyle(
-  fontSize: 23.0,
+  fontSize: 30.0,
   fontWeight: FontWeight.w700,
 );
 
