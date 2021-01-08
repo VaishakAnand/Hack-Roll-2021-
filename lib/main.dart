@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'landing.dart';
+import 'mainscreen.dart';
+import 'constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,11 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Away',
       theme: ThemeData.dark().copyWith(
-        primaryColor: Color(0xFF22C95C),
-        scaffoldBackgroundColor: Color(0xFF143930),
+        primaryColor: kAppBarColour,
+        scaffoldBackgroundColor: kBackgroundColour,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LandingPage(),
+      home: MainScreen(),
     );
   }
 }
