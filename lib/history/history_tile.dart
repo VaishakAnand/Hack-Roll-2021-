@@ -1,26 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
+import 'package:intl/intl.dart';
 
 class HistoryTile extends StatefulWidget {
-//  final DateTime dateTime;
+  final DateTime dateTime;
   final int valence;
   final int arousal;
   final List<String> keywords;
+  final Function onDelete;
+  final Function onClick;
 
   @override
   _HistoryTileState createState() => _HistoryTileState();
 
-//  HistoryTile({this.dateTime, this.valence, this.arousal, this.keywords});
-  HistoryTile({this.valence, this.arousal, this.keywords});
+  HistoryTile({this.dateTime, this.valence, this.arousal, this.keywords, this.onDelete, this.onClick});
 }
 
 class _HistoryTileState extends State<HistoryTile> {
+
   @override
   Widget build(BuildContext context) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd jm');
+    final String formatted = formatter.format(widget.dateTime);
+
     return Container(
       child: ListTile(
-        title: Text("test"),
+        title: Text(formatted),
         subtitle: _buildContent(),
+        onTap: widget.onClick,
+        onLongPress: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => _buildPopupDialog(context),
+          );
+        },
       ),
       color: Colors.black38,
     );
@@ -56,6 +69,26 @@ class _HistoryTileState extends State<HistoryTile> {
                 combine: ItemTagsCombine.withTextBefore,
               );
             })
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Delete History?'),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('No'),
+        ),
+        new FlatButton(
+          onPressed: widget.onDelete,
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Yes'),
+        ),
       ],
     );
   }
