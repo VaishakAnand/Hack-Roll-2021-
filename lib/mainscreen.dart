@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
-import 'history.dart';
+import 'history/history.dart';
 
 // Mainscreen w/ BottomNavigationBar functionality to switch pages.
 class MainScreen extends StatefulWidget {
