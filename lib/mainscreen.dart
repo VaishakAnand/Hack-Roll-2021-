@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'history.dart';
 
-// Main Screen w/ BottomNavigationBar functionality to switch pages.
+// Mainscreen w/ BottomNavigationBar functionality to switch pages.
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();

@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/constants.dart';
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
+  @override
+  _HistoryPageState createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build (BuildContext context) {
-    return Container(
-      color: Colors.black12,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+        'Previous Searches',
+        style: kLabelTextStyle,
+        ),
+        centerTitle: true,
+      ),
     );
   }
 }
