@@ -34,9 +34,11 @@ class _TimeState extends State<Time> {
   }
 
   void _getCurrentTime() {
-    setState(() {
-      _currentTime = DateTime.now();
-    });
+    if (mounted) {
+      setState(() {
+        _currentTime = DateTime.now();
+      });
+    }
   }
 
   String _getGreetingTime() {
