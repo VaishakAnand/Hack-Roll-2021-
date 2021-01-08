@@ -35,6 +35,7 @@ dependencies:
   path: ^1.7.0
   flutter_tags: ^0.4.9
   intl: 0.16.1
+  path_provider: any
 
 dev_dependencies:
   flutter_test:

@@ -1,17 +1,20 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutterapp/utils/data.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
   DBProvider._();
+
   static final DBProvider db = DBProvider._();
   static Database _database;
 
   Future<Database> get database async {
     if (_database != null) {
-      return null;
+      return _database;
     }
 
     _database = await initDB();
@@ -19,15 +22,29 @@ class DBProvider {
   }
 
   initDB() async {
-    return await openDatabase(
-      join(await getDatabasesPath(), 'text_song_data.db'),
-      onCreate: (db, version) async {
-        await db.execute(
-          "CREATE TABLE data(id INTEGER PRIMARY KEY, datetime INTEGER, arousal INTEGER, valence INTEGER, keywords TEXT, songname TEXT, artistname TEXT, genre TEXT, releaseyear TEXT)",
-        );
-      },
-      version: 1,
-    );
+//    return await openDatabase(
+//      join(await getDatabasesPath(), 'text_song_data.db'),
+//      onCreate: (db, version) async {
+//        await db.execute(
+//          "CREATE TABLE data(id INTEGER PRIMARY KEY, datetime INTEGER, arousal INTEGER, valence INTEGER, keywords TEXT, songname TEXT, artistname TEXT, genre TEXT, releaseyear TEXT)",
+//        );
+//      },
+//      version: 1,
+//    );
+
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "text_song_data.db");
+    return await openDatabase(path, version: 1, onOpen: (db) {},
+        onCreate: (Database db, int version) async {
+      await db.execute(
+        "CREATE TABLE data(id INTEGER PRIMARY KEY,"
+            " datetime INTEGER, arousal INTEGER,"
+            " valence INTEGER, keywords TEXT,"
+            " songname TEXT, artistname TEXT,"
+            " genre TEXT,"
+            " releaseyear TEXT)",
+      );
+    });
   }
 
   Future<void> newData(Data newData) async {
