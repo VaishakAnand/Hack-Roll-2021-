@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Away',
+      title: 'Moodsical',
       theme: ThemeData.dark().copyWith(
         primaryColor: kAppBarColour,
         scaffoldBackgroundColor: kBackgroundColour,

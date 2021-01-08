@@ -1,9 +1,11 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/music_api.dart';
+import 'package:flutterapp/results.dart';
+import 'package:flutterapp/song_calculator.dart';
 import 'package:flutterapp/utils/database.dart';
 import 'package:flutterapp/results.dart';
-
 import 'bottom_button.dart';
 import 'searchbutton.dart';
 import 'time_display.dart';
@@ -83,7 +85,6 @@ class _HomePageState extends State<HomePage> {
                     onPressed: _listen,
                     child: Icon(_isListening ? Icons.mic : Icons.mic_none),
                   ),
-
                 ),
               ],
             ),
@@ -100,13 +101,19 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
               } else {
+                // SongCalculator songCalculator =
+                //     SongCalculator(moodText: textController.text);
+                // songCalculator.getSongDetails();
+                // textController.clear();
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsPage(
-                        interpretation: 'your mood',
-                        tempResult: 'song name',
-                        resultText: 'artist name'),
+                        // interpretation: 'your mood',
+                        // tempResult: 'song name',
+                        // resultText: 'artist name'),
+                        testWidget: Music()),
                   ),
                 );
               }
@@ -137,6 +144,4 @@ class _HomePageState extends State<HomePage> {
       _speech.stop();
     }
   }
-
-
 }
