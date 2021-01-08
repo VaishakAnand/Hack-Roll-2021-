@@ -1,7 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/utils/database.dart';
 import 'package:flutterapp/results.dart';
+
 import 'bottom_button.dart';
 import 'searchbutton.dart';
 import 'time_display.dart';
@@ -81,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: _listen,
                     child: Icon(_isListening ? Icons.mic : Icons.mic_none),
                   ),
+
                 ),
               ],
             ),
