@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({@required this.onPressed,});
+  CustomButton({
+    @required this.onPressed,
+  });
 
   final GestureTapCallback onPressed;
 
@@ -28,6 +30,9 @@ class CustomButton extends StatelessWidget {
               'Search',
               maxLines: 1,
               style: kBodyTextStyle,
+            ),
+            SizedBox(
+              width: 10.0,
             ),
             Icon(
               Icons.music_note,

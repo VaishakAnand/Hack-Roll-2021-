@@ -20,11 +20,11 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Flutter Away',
+          'Moodsical',
         ),
         centerTitle: true,
       ),
-      body: SpeechScreen()
+      body: SpeechScreen(),
     );
   }
 }
