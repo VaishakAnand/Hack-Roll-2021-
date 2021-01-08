@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/api_management.dart';
+import 'package:flutterapp/bottom_button.dart';
+import 'package:flutterapp/results_card.dart';
 import 'music_suggestions.dart';
 import 'sentiment_score.dart';
+import 'constants.dart';
 
 class Music extends StatefulWidget {
-  String userInputText;
-
-  Music({@required this.userInputText});
-
   @override
   MusicState createState() => MusicState();
 }
@@ -15,8 +14,6 @@ class Music extends StatefulWidget {
 class MusicState extends State<Music> {
   MusicSuggestions _suggestions;
   bool _loading;
-  SentimentScore sentimentScore;
-  MusicApi musicApi;
 
   @override
   void initState() {
@@ -30,7 +27,7 @@ class MusicState extends State<Music> {
   }
 
   void _initialLoad() async {
-    await musicApi.getSuggestions().then((suggestions) {
+    await MusicApi.getSuggestions().then((suggestions) {
       setState(() {
         _suggestions = suggestions;
       });
@@ -41,11 +38,10 @@ class MusicState extends State<Music> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Here are your music suggestions'),
-        ),
+        // appBar: AppBar(
+        //   title: Text('Here are your music suggestions'),
+        // ),
         body: Center(child: _showDetails()));
   }
 
@@ -59,9 +55,70 @@ class MusicState extends State<Music> {
       String artistName = _suggestions.tracks.track[0].artistDisplayName;
       String genre = _suggestions.tracks.track[0].genre;
       String releaseYear = _suggestions.tracks.track[0].releasedate;
-      return Text(
-        "Name: $songName\nArtist: $artistName\nRelease Year: $releaseYear\nGenre: $genre",
-        style: TextStyle(fontSize: 20),
+      // return Text(
+      //   "Name: $songName\nArtist: $artistName\nRelease Year: $releaseYear\nGenre: $genre",
+      //   style: TextStyle(fontSize: 20),
+      // );
+      return Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  'Here are your music suggestions',
+                  style: kBodyTextStyle,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: ResultsCard(
+                colour: kCardColour,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      artistName.toUpperCase(),
+                      style: kResultTextStyle,
+                    ),
+                    Text(
+                      songName,
+                      style: kSongTextStyle,
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          genre,
+                          textAlign: TextAlign.center,
+                          style: kBodyTextStyle,
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          releaseYear,
+                          textAlign: TextAlign.center,
+                          style: kBodyTextStyle,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            BottomButton(
+              buttonTitle: 'TRY A DIFFERENT MOOD',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
       );
     }
   }
