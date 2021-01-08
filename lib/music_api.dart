@@ -22,6 +22,10 @@ class MusicState extends State<Music> {
   void initState() {
     super.initState();
     _loading = true;
+    sentimentScore = SentimentScore(widget.userInputText);
+    musicApi = MusicApi(
+        valence: sentimentScore.getValenceScore(),
+        arousal: sentimentScore.getArousalScore());
     _initialLoad();
   }
 
@@ -29,19 +33,15 @@ class MusicState extends State<Music> {
     await musicApi.getSuggestions().then((suggestions) {
       setState(() {
         _suggestions = suggestions;
-        _loading = false;
       });
-    });
+    }).then((value) => setState(() {
+      _loading = false;
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    sentimentScore = SentimentScore(widget.userInputText);
-    musicApi = MusicApi(
-        valence: sentimentScore.getValenceScore(),
-        arousal: sentimentScore.getArousalScore());
-    // print(sentimentScore.getValenceScore());
-    // print('Valence score' + );
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Here are your music suggestions'),

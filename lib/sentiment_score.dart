@@ -24,7 +24,10 @@ class SentimentScore {
   /// 500,000 is the neutral score
   int getArousalScore() {
     double comparative = analysis["comparative"];
-    return (comparative * 1000000).round();
+    if (comparative < 0) {
+      comparative *= -1;
+    }
+    return (comparative * 200000).round();
   }
 
   List<String> getPositiveKeywords() {
