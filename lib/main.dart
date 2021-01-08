@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'landing.dart';
+import 'mainscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFF0d2620),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LandingPage(),
+      home: MainScreen(),
     );
   }
 }
