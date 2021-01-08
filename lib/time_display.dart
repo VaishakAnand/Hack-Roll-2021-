@@ -34,9 +34,11 @@ class _TimeState extends State<Time> {
   }
 
   void _getCurrentTime() {
-    setState(() {
-      _currentTime = DateTime.now();
-    });
+    if (mounted) {
+      setState(() {
+        _currentTime = DateTime.now();
+      });
+    }
   }
 
   String _getGreetingTime() {
@@ -44,14 +46,14 @@ class _TimeState extends State<Time> {
 
     if (_currentTime.isAtSameMomentAs(midnight) ||
         (_currentTime.isAfter(midnight) && _currentTime.isBefore(noon))) {
-      greeting = 'morning';
+      greeting = 'Morning';
     } else if (_currentTime.isAtSameMomentAs(noon) ||
         (_currentTime.isAfter(noon) && _currentTime.isBefore(evening))) {
-      greeting = 'afternoon';
+      greeting = 'Afternoon';
     } else if (_currentTime.isAtSameMomentAs(evening) ||
         (_currentTime.isAfter(evening) &&
             _currentTime.isBefore(nextMidnight))) {
-      greeting = 'evening';
+      greeting = 'Evening';
     }
 
     return 'Good $greeting';

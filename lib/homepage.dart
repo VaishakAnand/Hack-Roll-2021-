@@ -4,7 +4,10 @@ import 'package:flutterapp/constants.dart';
 import 'package:flutterapp/music_api.dart';
 import 'package:flutterapp/results.dart';
 import 'package:flutterapp/song_calculator.dart';
+import 'package:flutterapp/utils/database.dart';
+import 'package:flutterapp/results.dart';
 import 'bottom_button.dart';
+import 'searchbutton.dart';
 import 'time_display.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -31,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Flutter Away',
+          'Moodsical',
           style: kLabelTextStyle,
         ),
         centerTitle: true,
@@ -43,6 +46,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
+                alignment: Alignment.bottomCenter,
                 child: Time(),
               ),
             ),
@@ -59,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextField(
+                    textAlign: TextAlign.center,
                     controller: textController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -84,9 +89,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          BottomButton(
-            buttonTitle: 'SEARCH',
-            onTap: () {
+          CustomButton(
+            onPressed: () {
               if (textController.text.isEmpty) {
                 showDialog(
                   context: context,
@@ -123,12 +127,11 @@ class _HomePageState extends State<HomePage> {
   void _listen() async {
     if (!_isListening) {
       bool available = await _speech.initialize(onStatus: (val) {
-        print("status: $val");
         if (val == 'notListening') {
           _isListening = false;
         }
       });
-      if (available) {
+      if (available && mounted) {
         setState(() => _isListening = true);
         _speech.listen(
           onResult: (val) => setState(() {
