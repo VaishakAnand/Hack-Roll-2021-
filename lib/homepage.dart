@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 import 'bottom_button.dart';
 
-class LandingPage extends StatefulWidget {
+// This is the page when you click 'HOME'
+
+class HomePage extends StatefulWidget {
   @override
-  _LandingPageState createState() => _LandingPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _HomePageState extends State<HomePage> {
   final textController = TextEditingController();
 
   @override
