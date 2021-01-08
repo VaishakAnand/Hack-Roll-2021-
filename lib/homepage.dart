@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 import 'bottom_button.dart';
+import 'time_display.dart';
 
 // This is the page when you click 'HOME'
 
@@ -30,10 +31,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  child: Text(
-                    'Good afternoon',
-                    style: kGreetingTextStyle,
-                  ),
+                  child: Time(),
                 ),
               ),
             ),
