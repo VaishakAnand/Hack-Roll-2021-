@@ -33,85 +33,96 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Moodsical',
+          'Moodsicle',
           style: kLabelTextStyle,
         ),
         centerTitle: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
         children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                child: Time(),
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('images/home_background.jpg'),
+              fit: BoxFit.cover,
+            )),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    child: Time(),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'How are you feeling today?',
-                  style: kBodyTextStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: textController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      hintText: 'Tell us!',
+              Expanded(
+                flex: 7,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'How are you feeling today?',
+                      style: kBodyTextStyle,
                     ),
-                    cursorColor: kAppBarColour,
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        controller: textController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          hintText: 'Tell us!',
+                        ),
+                        cursorColor: kAppBarColour,
+                      ),
+                    ),
+                    AvatarGlow(
+                      animate: _isListening,
+                      glowColor: Theme.of(context).primaryColor,
+                      endRadius: 30.0,
+                      duration: const Duration(milliseconds: 2000),
+                      repeatPauseDuration: const Duration(milliseconds: 100),
+                      repeat: true,
+                      child: FlatButton(
+                        onPressed: _listen,
+                        child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+                      ),
+                    ),
+                  ],
                 ),
-                AvatarGlow(
-                  animate: _isListening,
-                  glowColor: Theme.of(context).primaryColor,
-                  endRadius: 30.0,
-                  duration: const Duration(milliseconds: 2000),
-                  repeatPauseDuration: const Duration(milliseconds: 100),
-                  repeat: true,
-                  child: FlatButton(
-                    onPressed: _listen,
-                    child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomButton(
-            onPressed: () {
-              if (textController.text.isEmpty) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Please enter some text!'),
+              ),
+              CustomButton(
+                onPressed: () {
+                  if (textController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Please enter some text!'),
+                        );
+                      },
                     );
-                  },
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultsPage(
-                      testWidget: Music(
-                        userInputText: textController.text,
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultsPage(
+                          testWidget: Music(
+                            userInputText: textController.text,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              }
-            },
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ],
       ),

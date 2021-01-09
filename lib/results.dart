@@ -9,7 +9,7 @@ class ResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Moodsical'),
+        title: Text('Moodsicle'),
       ),
       body: testWidget,
     );

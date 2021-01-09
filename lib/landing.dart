@@ -20,7 +20,7 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Moodsical',
+          'Moodsicle',
         ),
         centerTitle: true,
       ),
