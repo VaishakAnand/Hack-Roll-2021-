@@ -109,12 +109,14 @@ class _HomePageState extends State<HomePage> {
                       },
                     );
                   } else {
+                    String _data = textController.text;
+                    textController.clear();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ResultsPage(
                           testWidget: Music(
-                            userInputText: textController.text,
+                            userInputText: _data,
                           ),
                         ),
                       ),
@@ -123,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ],
-          ),
+          )
         ],
       ),
     );
