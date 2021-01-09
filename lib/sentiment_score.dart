@@ -20,7 +20,7 @@ class SentimentScore {
   }
 
   /// Return Arousal score from 0 - 1,000000
-  /// 500,000 is the neutral score
+  /// 0 is the neutral score
   int getArousalScore() {
     double comparative = analysis["comparative"];
     if (comparative < 0) {
