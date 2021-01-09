@@ -61,6 +61,7 @@ class MusicState extends State<Music> {
       String artistName = _suggestions.tracks.track[0].artistDisplayName;
       String genre = _suggestions.tracks.track[0].genre;
       String releaseYear = _suggestions.tracks.track[0].releasedate;
+       _updateDatabase(songName, artistName, genre, releaseYear);
       return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
