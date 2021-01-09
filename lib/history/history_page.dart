@@ -49,7 +49,6 @@ class HistoryPage extends StatelessWidget {
       Data currentData = tiles[i];
       List<String> splitKeywords = currentData.keywords.split("|");
       splitKeywords.removeLast();
-      print(splitKeywords);
       HistoryTile newTile = HistoryTile(
         dateTime: Date.getDateFromDatabase(currentData.dateTime),
         valence: currentData.valenceScore,
