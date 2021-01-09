@@ -38,100 +38,83 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/home_background.jpg"),
-            fit: BoxFit.cover,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Time(),
+              ),
+            ),
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Time(),
+          Expanded(
+            flex: 7,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'How are you feeling today?',
+                  style: kBodyTextStyle,
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 7,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'How are you feeling today?',
-                    style: kBodyTextStyle,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: textController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        hintText: 'Tell us!',
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: textController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      cursorColor: kAppBarColour,
+                      hintText: 'Tell us!',
                     ),
+                    cursorColor: kAppBarColour,
                   ),
-                  AvatarGlow(
-                    animate: _isListening,
-                    glowColor: Theme.of(context).primaryColor,
-                    endRadius: 30.0,
-                    duration: const Duration(milliseconds: 2000),
-                    repeatPauseDuration: const Duration(milliseconds: 100),
-                    repeat: true,
-                    child: FlatButton(
-                      onPressed: _listen,
-                      child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-                    ),
+                ),
+                AvatarGlow(
+                  animate: _isListening,
+                  glowColor: Theme.of(context).primaryColor,
+                  endRadius: 30.0,
+                  duration: const Duration(milliseconds: 2000),
+                  repeatPauseDuration: const Duration(milliseconds: 100),
+                  repeat: true,
+                  child: FlatButton(
+                    onPressed: _listen,
+                    child: Icon(_isListening ? Icons.mic : Icons.mic_none),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            CustomButton(
-
-              onPressed: () {
-                if (textController.text.isEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Please enter some text!'),
-                      );
-                    },
-                  );
-                } else {
-                  // SongCalculator songCalculator =
-                  //     SongCalculator(moodText: textController.text);
-                  // songCalculator.getSongDetails();
-                  // textController.clear();
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultsPage(
-                        // interpretation: 'your mood',
-                        // tempResult: 'song name',
-                        // resultText: 'artist name'),
-                        testWidget: Music(
-                          userInputText: textController.text,
-                        ),
+          ),
+          CustomButton(
+            onPressed: () {
+              if (textController.text.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Please enter some text!'),
+                    );
+                  },
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                      testWidget: Music(
+                        userInputText: textController.text,
                       ),
                     ),
-                  );
-                }
-              },
-            ),
-          ],
-        ),
-      )
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 
