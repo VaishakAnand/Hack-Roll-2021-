@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
 import 'package:flutterapp/music_api.dart';
 import 'package:flutterapp/results.dart';
-import 'package:flutterapp/song_calculator.dart';
 import 'package:flutterapp/utils/database.dart';
 import 'package:flutterapp/results.dart';
 import 'bottom_button.dart';
@@ -97,6 +96,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             CustomButton(
+
               onPressed: () {
                 if (textController.text.isEmpty) {
                   showDialog(

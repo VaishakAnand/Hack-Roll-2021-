@@ -17,7 +17,7 @@ const kGreetingTextStyle = TextStyle(
 );
 
 const kBodyTextStyle = TextStyle(
-  fontSize: 20.0,
+  fontSize: 23.0,
   fontWeight: FontWeight.w500,
 );
 
