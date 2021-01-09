@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/constants.dart';
+import 'package:flutterapp/date.dart';
 import 'package:flutterapp/history/history_tile.dart';
 import 'package:flutterapp/utils/data.dart';
 import 'package:flutterapp/utils/database.dart';
@@ -26,8 +27,8 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "History",
-            style: kLabelTextStyle,
+          "History",
+          style: kLabelTextStyle,
         ),
         centerTitle: true,
       ),
@@ -36,10 +37,7 @@ class HistoryPage extends StatelessWidget {
   }
 
   Future<List<Data>> _getData() async {
-    // DBProvider.db.newData(new Data(
-    //     arousalScore: 100, valenceScore: 100, keywords: "sad|happy|angry"));
     List<Data> allData = await DBProvider.db.getAllData();
-
     return allData;
   }
 
@@ -50,11 +48,14 @@ class HistoryPage extends StatelessWidget {
     for (var i = 0; i < tiles.length; i++) {
       Data currentData = tiles[i];
       List<String> splitKeywords = currentData.keywords.split("|");
+      splitKeywords.removeLast();
+      print(splitKeywords);
       HistoryTile newTile = HistoryTile(
+        dateTime: Date.getDateFromDatabase(currentData.dateTime),
         valence: currentData.valenceScore,
         arousal: currentData.arousalScore,
         onDelete: () => DBProvider.db.deleteData(currentData.id),
-        onClick: (){},
+        onClick: () {},
         keywords: splitKeywords,
       );
 
@@ -67,15 +68,12 @@ class HistoryPage extends StatelessWidget {
         return new Column(
           children: <Widget>[
             historyTiles[index],
-            // new Divider(
-            //   height: 2.0,
-            // ),
+            new Divider(
+              height: 2.0,
+            ),
           ],
         );
       },
     );
   }
 }
-// <Widget>[
-//           HistoryTile(valence: 24, arousal: 30, keywords: s),
-//         ],
